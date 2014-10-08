@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-import urllib2, pytesseract,Image
+import urllib2, pytesseract, Image, time
 
 
 class handler:
@@ -43,6 +43,7 @@ class handler:
 		txtbox1.send_keys(text)
 
 		#submit
+		time.sleep(5)				#waiting in order to avoid server-side check (refer comment https://gist.github.com/ishankhare07/2a96ca58981ba99aca91#comment-1314588)
 		self.driver.find_element_by_name('btnviewresult').click()
 
 	#taking screenshot
