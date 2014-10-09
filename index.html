@@ -1,8 +1,37 @@
 <html>
 	<head>
-		<title>Plot of CSE 4th semester results</title>
+		<title>Plot of RGPV 4th semester results</title>
+		<script src="index.js"></script>
+
+		<link rel = "stylesheet" href = "index.css" />
+
+		<script>
+			window.onload = function() {
+ 				var college = document.getElementById('college');
+
+				for(var x in data) {
+					var clg = document.createElement('option');
+					var text = document.createTextNode(x);
+					clg.setAttribute('value',x);
+					clg.appendChild(text);
+					college.appendChild(clg);
+				}
+}
+		</script>
 	</head>
 <body>
-	<iframe width="800" height="600" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~IshanKhare/1.embed?width=800&height=600"></iframe>
+	<div id="dropdown">
+		Select your college <select id = "college" onchange="college_selected()">
+			<option value="">--</option>
+		</select>
+
+		<br>
+
+		Select your branch <select id = "branch" onchange="branch_selected()">
+			<option value="">--</option>
+		</select>
+	</div>
+
+	<iframe id = "graph" width="800" height="600" frameborder="0" seamless="seamless" scrolling="no" src=""></iframe>
 </body>
 </html>

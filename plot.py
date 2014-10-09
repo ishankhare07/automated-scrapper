@@ -11,7 +11,7 @@ class plot_bot:
 		self.roll_no = []
 
 	def get_data(self):
-		file = anydbm.open('myscraps','r')
+		file = anydbm.open('lncts-ec','r')
 		for roll_no in sorted(file.keys()):
 			soup = BeautifulSoup(file[roll_no])
 			self.roll_no.append(roll_no[-3:])
