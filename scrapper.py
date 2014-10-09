@@ -8,7 +8,7 @@ import pytesseract, Image, time, anydbm, json
 
 class handler:
 	def __init__(self):
-		self.file = anydbm.open('/home/ishan/Desktop/automated-scrapper/lncts-ec','c')
+		self.file = anydbm.open('/home/ishan/Desktop/automated-scrapper/data/lnct-it','c')
 		self.driver = webdriver.Firefox()
 
 	#select course
@@ -109,8 +109,8 @@ class handler:
 
 if __name__ == '__main__':
 
-	static_roll = '0157ec121'
-	dynamic_roll = [static_roll + '%03d' %x for x in range(1,92)]
+	static_roll = '0103it121'
+	dynamic_roll = [static_roll + '%03d' %x for x in range(1,120)]
 	h = handler()
 	for roll_no in dynamic_roll:
 		if h.navigate() and h.enter(roll_no):

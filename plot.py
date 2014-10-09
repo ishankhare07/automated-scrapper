@@ -11,7 +11,7 @@ class plot_bot:
 		self.roll_no = []
 
 	def get_data(self):
-		file = anydbm.open('lncts-ec','r')
+		file = anydbm.open('data/lnct-it','r')
 		for roll_no in sorted(file.keys()):
 			soup = BeautifulSoup(file[roll_no])
 			self.roll_no.append(roll_no[-3:])
@@ -19,12 +19,12 @@ class plot_bot:
 			self.cgpa.append(soup.find(id='lblcgpa').get_text())
 	
 	def plot(self):
-		sgpa = Bar(
+		sgpa = Scatter(
 			x = self.roll_no,
 			y = self.sgpa
 		)
 
-		cgpa = Bar(
+		cgpa = Scatter(
 			x = self.roll_no,
 			y = self.cgpa
 		)
