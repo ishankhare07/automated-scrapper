@@ -1,25 +1,41 @@
+from __future__ import print_function
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-import urllib2, pytesseract, Image, time
+from selenium.webdriver.common.alert import Alert
+import pytesseract, Image, time, anydbm, json
 
 
 class handler:
 	def __init__(self):
-		self.starting = '0842ar121011'
+		self.file = anydbm.open('/home/ishan/Desktop/2a96ca58981ba99aca91/myscraps','c')
 		self.driver = webdriver.Firefox()
 
 	#select course
 	def navigate(self):
-		self.driver.get('http://result.rgpv.ac.in/exam/programselect.aspx')
-		self.driver.find_element_by_id('radlstProgram_3').click()
+		try:
+			self.driver.get('http://result.rgpv.ac.in/exam/programselect.aspx')
+			self.driver.find_element_by_id('radlstProgram_0').click()
+			return True
+		except:
+			try:
+				Alert(self.driver).dismiss()
+				self.navigate()
+			except:
+				return None
 
 	#enter details
-	def enter(self):
+	def enter(self,roll):
+		crc = 0
+		if roll in self.file.keys():
+			return None
+		self.current_roll = roll
 		#enter name
-		roll = self.driver.find_element_by_id('txtrollno')
-		roll.send_keys(self.starting)
+		try:
+			roll = self.driver.find_element_by_id('txtrollno')
+			roll.send_keys(self.current_roll)
+		except:
+			pass
 
 		#select semester
 		sem = Select(self.driver.find_element_by_name('drpSemester'))
@@ -35,8 +51,13 @@ class handler:
 		self.crop_image(location,size)
 
 		#capture image text
-		text = self.recover_text('myfile.png').strip()
-		print text
+		while crc <= 3:
+			text = self.recover_text('myfile.png').strip()
+			if text:
+				print(text)
+				break
+			else:
+				crc += 1
 
 		#entering captcha text
 		txtbox1 = self.driver.find_element_by_id('TextBox1')
@@ -44,7 +65,14 @@ class handler:
 
 		#submit
 		time.sleep(5)				#waiting in order to avoid server-side check (refer comment https://gist.github.com/ishankhare07/2a96ca58981ba99aca91#comment-1314588)
+		try:
+			Alert(self.driver).dismiss()
+			return None
+		except:
+			pass
 		self.driver.find_element_by_name('btnviewresult').click()
+
+		return True
 
 	#taking screenshot
 	def take_screenshot(self):
@@ -64,8 +92,26 @@ class handler:
 		image = Image.merge('RGB',(r,g,b))
 		return pytesseract.image_to_string(image)
 
+	def save(self):
+		try:
+			Alert(self.driver).dismiss()
+			return
+		except:
+			pass
+		result = self.driver.page_source.encode('utf-8')
+		if self.current_roll not in self.file.keys():
+			try:
+				self.driver.find_element_by_id('lblStreamGrading')
+				self.file[self.current_roll] = result
+				print('saved', self.current_roll)
+			except Exception as e:
+				print(e)
 
 if __name__ == '__main__':
+
+	static_roll = '0103cs121'
+	dynamic_roll = [static_roll + '%03d' %x for x in range(1,121)]
 	h = handler()
-	h.navigate()
-	h.enter()
+	for roll_no in dynamic_roll:
+		if h.navigate() and h.enter(roll_no):
+			h.save()
