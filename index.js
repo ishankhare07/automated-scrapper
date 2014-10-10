@@ -15,7 +15,7 @@ data = {
 function college_selected() {
 	var college = document.getElementById('college').value;
 	var branch = document.getElementById('branch');
-	branch.innerHTML = "";
+	branch.innerHTML = "<option value = "">--</option>";
 
 	for(var x in data[college]) {
 		var container = document.createElement('option');
