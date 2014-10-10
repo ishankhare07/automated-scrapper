@@ -1,7 +1,8 @@
 data = {
 	"lncts" : {
 		"ec" : "https://plot.ly/~IshanKhare/2/800/600",
-		"cse" : "https://plot.ly/~IshanKhare/6/800/600"
+		"cse" : "https://plot.ly/~IshanKhare/6/800/600",
+		"it" : "https://plot.ly/~IshanKhare/7/800/600",
 	},
 
 	"lnct" : {
@@ -9,7 +10,11 @@ data = {
 		"ec" : "https://plot.ly/~IshanKhare/4/800/600",
 		"it" : "https://plot.ly/~IshanKhare/3/800/600",
 		"me" : "https://plot.ly/~IshanKhare/5/800/600",
-	}
+	},
+
+	"tit" : {
+		"me" : "https://plot.ly/~IshanKhare/8/800/600",
+	},
 }
 
 function college_selected() {

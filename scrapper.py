@@ -110,8 +110,8 @@ class handler:
 
 if __name__ == '__main__':
 
-	static_roll = '0103me121'
-	dynamic_roll = [static_roll + '%03d' %x for x in range(1,181)]
+	static_roll = '0111me121'
+	dynamic_roll = [static_roll + '%03d' %x for x in range(1,131)]
 	h = handler()
 	for roll_no in dynamic_roll:
 		if h.navigate() and h.enter(roll_no):

@@ -21,12 +21,14 @@ class plot_bot:
 	def plot(self):
 		sgpa = Scatter(
 			x = self.roll_no,
-			y = self.sgpa
+			y = self.sgpa,
+			name = 'SGPA'
 		)
 
 		cgpa = Scatter(
 			x = self.roll_no,
-			y = self.cgpa
+			y = self.cgpa,
+			name = 'CGPA'
 		)
 
 		data = Data([sgpa,cgpa])
