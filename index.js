@@ -15,7 +15,14 @@ data = {
 function college_selected() {
 	var college = document.getElementById('college').value;
 	var branch = document.getElementById('branch');
-	branch.innerHTML = "<option value = "">--</option>";
+
+	//resseting the branch list
+	branch.innerHTML = '';
+
+	var empty = document.createElement('option');
+	empty.setAttribute('value','');
+	empty.appendChild(document.createTextNode('--'));
+	branch.appendChild(empty);
 
 	for(var x in data[college]) {
 		var container = document.createElement('option');
