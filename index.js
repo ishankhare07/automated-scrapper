@@ -1,6 +1,7 @@
 data = {
 	"lncts" : {
 		"ec" : "https://plot.ly/~IshanKhare/2/800/600",
+		"cse" : "https://plot.ly/~IshanKhare/6/800/600"
 	},
 
 	"lnct" : {
