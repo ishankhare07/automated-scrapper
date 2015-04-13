@@ -40,7 +40,7 @@ class handler:
 
 		#select semester
 		sem = Select(self.driver.find_element_by_name('drpSemester'))
-		sem.select_by_value('4')
+		sem.select_by_value('5')
 
 		#taking screenshot
 		self.take_screenshot()
@@ -110,8 +110,8 @@ class handler:
 
 if __name__ == '__main__':
 
-	static_roll = '0111me121'
-	dynamic_roll = [static_roll + '%03d' %x for x in range(1,131)]
+	static_roll = '0103cs121'
+	dynamic_roll = [static_roll + '%03d' %x for x in range(1,121)]
 	h = handler()
 	for roll_no in dynamic_roll:
 		if h.navigate() and h.enter(roll_no):

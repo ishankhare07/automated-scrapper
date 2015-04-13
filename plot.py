@@ -19,13 +19,13 @@ class plot_bot:
 			self.cgpa.append(soup.find(id='lblcgpa').get_text())
 	
 	def plot(self):
-		sgpa = Scatter(
+		sgpa = Bar(
 			x = self.roll_no,
 			y = self.sgpa,
 			name = 'SGPA'
 		)
 
-		cgpa = Scatter(
+		cgpa = Bar(
 			x = self.roll_no,
 			y = self.cgpa,
 			name = 'CGPA'
